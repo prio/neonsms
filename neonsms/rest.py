@@ -26,6 +26,9 @@ class Messages(object):
         self.base = base
 
     def create(self, to=None, from_=None, body=None):
+        #url = '{}/sms.php?user={}&clipwd={}&text={}&to={}&from={}'.format(
+        #    self.base, self.account, self.token, urllib.quote(body), to, from_
+        #)
         url = '{}/sms.php?user={}&clipwd={}&text={}&to={}'.format(
             self.base, self.account, self.token, urllib.quote(body), to
         )
@@ -67,8 +70,9 @@ values from your Neon Account at http://www.neonsms.ie
 
 if __name__ == '__main__':
     import sys
-    if len(sys.argv) != 2:
-        print("{} <to number>".format(sys.argv[0]))
+    if len(sys.argv) != 3:
+        print("{} <to number> <from number>".format(sys.argv[0]))
     else:
         client = NeonRestClient()
+        #client.messages.create(to=sys.argv[1], from_=sys.argv[2], body="Hi there")
         client.messages.create(to=sys.argv[1], body="Hi there")
